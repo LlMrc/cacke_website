@@ -11,10 +11,10 @@ class DetailsPage extends StatelessWidget {
     return Column(
       children: [
          SizedBox(height: isDesktop(context) ? 120: 8),
-        SizedBox(
+        const SizedBox(
           width: 600,
           child: Row(
-            children: const <Widget>[
+            children: <Widget>[
               Expanded(
                   child: Divider(
                 indent: 20,
@@ -29,7 +29,7 @@ class DetailsPage extends StatelessWidget {
           width: isDesktop(context) ? size * 0.65 : size,
           margin: const EdgeInsets.symmetric(vertical: 40),
           decoration: BoxDecoration(
-              color: AppColor.mainColor,
+              color: Colors.white,
               borderRadius: BorderRadius.circular(10),
               boxShadow: const [
                 BoxShadow(
@@ -39,10 +39,10 @@ class DetailsPage extends StatelessWidget {
                   offset: Offset(0.0, 0.0),
                 )
               ]),
-          child: Wrap(
+          child: const Wrap(
             alignment: WrapAlignment.spaceAround,
             runAlignment: WrapAlignment.center,
-            children: const [
+            children: [
               Proposal(
                   title: "ouverture",
                   subtitle: 'horaires de travail',

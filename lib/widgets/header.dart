@@ -1,3 +1,4 @@
+import 'package:animated_text_kit/animated_text_kit.dart';
 import 'package:flutter/material.dart';
 
 import '../utils/constant.dart';
@@ -7,11 +8,17 @@ class Header extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
+    var widht = MediaQuery.of(context).size.width;
+    var height = MediaQuery.of(context).size.height;
+    return SizedBox(
+      height: height,
+     
       width: isSmallCreen(context)
-          ? MediaQuery.of(context).size.width
-          : MediaQuery.of(context).size.width * 0.70,
+          ? widht
+          : widht * 0.70,
       child: Wrap(
+        spacing: 8,
+        runSpacing: 10,
         alignment: WrapAlignment.center,
         children: [titleSection(context), previewedSection()],
       ),
@@ -21,7 +28,7 @@ class Header extends StatelessWidget {
   Widget titleSection(BuildContext context) {
     return Container(
       height: 500,
-      width: isDesktop(context) ? 400 : 700,
+      width: isDesktop(context) ? 500 : 700,
       alignment: Alignment.center,
       child: Padding(
         padding: const EdgeInsets.all(8.0),
@@ -45,12 +52,18 @@ class Header extends StatelessWidget {
                 textAlign: TextAlign.center,
               ),
             ),
-            const Text(
-              'Plongez dans un monde délicieux où les saveurs exquises et les créations sucrées prennent vie. Nous vous invitons à découvrir un univers gourmand où la passion pour la pâtisserie est célébrée à chaque bouchée.',
-              style: TextStyle(
-                  fontFamily: 'DacingScript',
-                  fontSize: 35,
-                  fontWeight: FontWeight.w600),
+            AnimatedTextKit(
+              totalRepeatCount: 1,
+              animatedTexts: [
+                TypewriterAnimatedText('Plongez dans un monde délicieux où les saveurs exquises et les créations sucrées prennent vie. Nous vous invitons à découvrir un univers gourmand où la passion pour la pâtisserie est célébrée à chaque bouchée.',
+              
+                textStyle:  const TextStyle(
+                    fontFamily: 'DacingScript',
+                    fontSize: 35,
+                    fontWeight: FontWeight.w600),
+)
+              ],
+           
             )
           ],
         ),
@@ -60,8 +73,8 @@ class Header extends StatelessWidget {
 
   Widget previewedSection() {
     return Container(
-      height: 500,
-      width: 450,
+      height: 450,
+      width: 430,
       decoration: const BoxDecoration(
           image: DecorationImage(
               fit: BoxFit.fill, image: AssetImage('assets/images/chef.png'))),

@@ -1,46 +1,114 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
-import '../utils/constant.dart';
 
-class HeroPage extends StatelessWidget {
+import 'hover_card.dart';
+
+class HeroPage extends StatefulWidget {
   const HeroPage({super.key});
 
   @override
+  State<HeroPage> createState() => _HeroPageState();
+}
+
+class _HeroPageState extends State<HeroPage> {
+  bool onHover = true;
+  static const greyScaleMatrix = [
+    0.2126,
+    0.7152,
+    0.0722,
+    0.0,
+    0.0,
+    0.2126,
+    0.7152,
+    0.0722,
+    0.0,
+    0.0,
+    0.2126,
+    0.7152,
+    0.0722,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0
+  ];
+  static const noFilter = [
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    0.0,
+    1.0,
+    0.0,
+  ];
+  @override
   Widget build(BuildContext context) {
     return Container(
-      margin: const EdgeInsets.symmetric(vertical: 20),
-      child: Column(
+        alignment: Alignment.center,
+      margin: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+      padding: const EdgeInsets.only(top: 40),
+      
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.center,
+        mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const SizedBox(height: 30),
-          const Text(
-            
-            'Succombez à la douceur, laissez nos pâtisseries éveiller vos papilles ',
-            textAlign: TextAlign.center,
-            style: TextStyle(fontSize: 20),
+          Container(
+          
+            width: 400,
+            padding: const EdgeInsets.symmetric(horizontal: 34),
+            child: Text(
+              'Succombez à la douceur, laissez nos pâtisseries éveiller vos papilles '
+                  .toUpperCase(),
+              textAlign: TextAlign.start,
+              style: const TextStyle(
+                fontWeight: FontWeight.w800,
+                fontSize: 40,
+                height: 1.3,
+              ),
+            ),
           ),
           Stack(
-             alignment: Alignment.center,
+            alignment: Alignment.center,
             clipBehavior: Clip.none,
             children: [
-            
-              Image.network(
-                'https://images.pexels.com/photos/4262420/pexels-photo-4262420.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
-                height: 400,
-                width: 600,
-              ),
-                 Positioned(
-                   width: 300,
-               
-                child:  Container(
-                  color: AppColor.mainColor.withOpacity(0.5),
-                  child: Text(
-                    
-                    'Laissez-vous séduire par nos créations sucrées, une tentation irrésistible pour les amateurs de gourmandises.',
-                    textAlign: TextAlign.center,
-                    style: TextStyle(fontSize: 24, color: AppColor.secondaryColor, fontWeight: FontWeight.w700),
+              MouseRegion(
+                onEnter: (event) => setState(() => onHover = true),
+                onExit: (event) => setState(() => onHover = false),
+                child: AnimatedContainer(
+                  
+                  duration: const Duration(milliseconds: 375),
+                  curve: Curves.easeIn,
+                  child: ColorFiltered(
+                    colorFilter: onHover?  const ColorFilter.matrix(greyScaleMatrix) :const ColorFilter.matrix(noFilter) ,
+                    child: Image.network(
+                      'https://images.pexels.com/photos/4262420/pexels-photo-4262420.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1',
+                      height: 400,
+                      width: 600,
+                    ),
                   ),
                 ),
               ),
+               Positioned(width: 300,
+               child: Visibility(
+                visible: onHover,
+                child: const HoverCard())),
             ],
           ),
         ],

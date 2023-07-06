@@ -1,4 +1,4 @@
-import 'package:cacke_website/utils/responsiveness.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 
@@ -16,6 +16,7 @@ class _ProductPageState extends State<ProductPage> {
   @override
   Widget build(BuildContext context) {
     return Container(
+      color: const Color(0xffFFDEDE),
       margin: const EdgeInsets.only(top: 100),
       alignment: Alignment.center,
    
